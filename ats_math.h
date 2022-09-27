@@ -874,6 +874,130 @@ struct v3 project(v3 a, v3 b) { return v3_project(a, b); }
 
 #endif
 
+// ---------------- min ----------------- //
+
+static v2
+v2_min(v2 a, v2 b) {
+  return V2(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y);
+}
+
+static v3
+v3_min(v3 a, v3 b) {
+  return V3(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y,
+    a.z < b.z? a.z : b.z);
+}
+
+static v4
+v4_min(v4 a, v4 b) {
+  return V4(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y,
+    a.z < b.z? a.z : b.z,
+    a.w < b.w? a.w : b.w);
+}
+
+static v2i
+v2i_min(v2i a, v2i b) {
+  return V2i(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y);
+}
+
+static v3i
+v3i_min(v3i a, v3i b) {
+  return V3i(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y,
+    a.z < b.z? a.z : b.z);
+}
+
+static v4i
+v4i_min(v4i a, v4i b) {
+  return V4i(
+    a.x < b.x? a.x : b.x,
+    a.y < b.y? a.y : b.y,
+    a.z < b.z? a.z : b.z,
+    a.w < b.w? a.w : b.w);
+}
+
+#ifdef __cplusplus
+
+static v2 min(v2 a, v2 b) { return v2_min(a, b); }
+static v3 min(v3 a, v3 b) { return v3_min(a, b); }
+static v4 min(v4 a, v4 b) { return v4_min(a, b); }
+
+static v2i min(v2i a, v2i b) { return v2i_min(a, b); }
+static v3i min(v3i a, v3i b) { return v3i_min(a, b); }
+static v4i min(v4i a, v4i b) { return v4i_min(a, b); }
+
+#endif
+
+// ---------------- max ----------------- //
+
+static v2
+v2_max(v2 a, v2 b) {
+  return V2(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y);
+}
+
+static v3
+v3_max(v3 a, v3 b) {
+  return V3(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y,
+    a.z > b.z? a.z : b.z);
+}
+
+static v4
+v4_max(v4 a, v4 b) {
+  return V4(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y,
+    a.z > b.z? a.z : b.z,
+    a.w > b.w? a.w : b.w);
+}
+
+static v2i
+v2i_max(v2i a, v2i b) {
+  return V2i(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y);
+}
+
+static v3i
+v3i_max(v3i a, v3i b) {
+  return V3i(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y,
+    a.z > b.z? a.z : b.z);
+}
+
+static v4i
+v4i_max(v4i a, v4i b) {
+  return V4i(
+    a.x > b.x? a.x : b.x,
+    a.y > b.y? a.y : b.y,
+    a.z > b.z? a.z : b.z,
+    a.w > b.w? a.w : b.w);
+}
+
+#ifdef __cplusplus
+
+static v2 max(v2 a, v2 b) { return v2_max(a, b); }
+static v3 max(v3 a, v3 b) { return v3_max(a, b); }
+static v4 max(v4 a, v4 b) { return v4_max(a, b); }
+
+static v2i max(v2i a, v2i b) { return v2i_max(a, b); }
+static v3i max(v3i a, v3i b) { return v3i_max(a, b); }
+static v4i max(v4i a, v4i b) { return v4i_max(a, b); }
+
+#endif
+
 // ---------------- lerp ----------------- //
 
 static v2 v2_lerp(v2 a, v2 b, float t) {
