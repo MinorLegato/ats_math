@@ -1620,7 +1620,6 @@ static unsigned int rand_u32(unsigned int* state) {
 
 // [min, max)
 static int rand_i32(unsigned int* state, int min, int max) {
-  assert(min < max);
   return min + rand_u32(state) % (max - min);
 }
 
