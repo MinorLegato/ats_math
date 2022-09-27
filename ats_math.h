@@ -1,11 +1,7 @@
 #pragma once
 
 #include <math.h>
-#include <string.h>
-#include <float.h>
-#include <assert.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 // ========================================== MACROS ========================================= //
 
