@@ -118,10 +118,6 @@ typedef struct sphere {
 
 #ifndef __cplusplus // C stuff
 
-#define ATS_INIT {0}
-
-#define Make(T) (T)
-
 #define V2(...) ((v2) { __VA_ARGS__ })
 #define V3(...) ((v3) { __VA_ARGS__ })
 #define V4(...) ((v4) { __VA_ARGS__ })
@@ -146,10 +142,6 @@ typedef struct sphere {
 #define M4(...) ((m4) { __VA_ARGS__ })
 
 #else // __cplusplus
-
-#define ATS_INIT {}
-
-#define Make(T) T
 
 static inline v2 V2(float x, float y)               { return { x, y }; }
 static inline v3 V3(float x, float y, float z)        { return { x, y, z }; }
