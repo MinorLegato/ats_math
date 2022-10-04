@@ -173,32 +173,35 @@ static inline sphere_t Sphere(v3 p, float rad) { return { p, rad }; }
 
 #endif
 
-static m2 m2_identity(void) {
+static inline m2 m2_identity(void) {
   return M2(
     1, 0,
-    0, 1);
+    0, 1
+  );
 }
 
-static m3 m3_identity(void) {
+static inline m3 m3_identity(void) {
   return M3(
     1, 0, 0,
     0, 1, 0,
-    0, 0, 1);
+    0, 0, 1
+  );
 }
 
-static m4 m4_identity(void) {
+static inline m4 m4_identity(void) {
   return M4(
     1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
-    0, 0, 0, 1);
+    0, 0, 0, 1
+  );
 }
 
-static quat_t quat_identity(void) {
+static inline quat_t quat_identity(void) {
   return Quat(0, 0, 0, 1);
 }
 
-static float sqrt32(float n) {
+static inline float sqrt32(float n) {
   float x = n * 0.5f;
   float y = n;
   int i = *(int*)&y;
@@ -210,7 +213,7 @@ static float sqrt32(float n) {
   return n * y;
 }
 
-static float rsqrt32(float n) {
+static inline float rsqrt32(float n) {
   float x2 = n * 0.5f;
   float y  = n;
   int i  = *(long*)&y;           // evil floating point bit level hacking
@@ -222,124 +225,124 @@ static float rsqrt32(float n) {
   return y;
 }
 
-static float shortest_angle_distance(float a, float b) {
+static inline float shortest_angle_distance(float a, float b) {
   float max = 2.0f * PI;
   float da  = fmodf(b - a, max);
 
   return fmodf(2.0f * da, max) - da;
 }
 
-static float lerp_angle(float a, float b, float t) {
+static inline float lerp_angle(float a, float b, float t) {
   return a + shortest_angle_distance(a, b) * t;
 }
 
-static float sine_ease_in(float t) {
+static inline float sine_ease_in(float t) {
   return 1 - cosf((t * PI) / 2);
 }
 
-static float sine_ease_out(float t) {
+static inline float sine_ease_out(float t) {
   return sinf((t * PI) / 2);
 }
 
-static float sine_ease_in_out(float t) {
+static inline float sine_ease_in_out(float t) {
   return -0.5 * (cosf(PI * t) - 1);
 }
 
-static float quad_ease_in(float t) {
+static inline float quad_ease_in(float t) {
   return t * t;
 }
 
-static float quad_ease_out(float t) {
+static inline float quad_ease_out(float t) {
   return 1 - (1 - t) * (1 - t);
 }
 
-static float quad_ease_in_out(float t) {
+static inline float quad_ease_in_out(float t) {
   float k = -2 * t + 2;
   return (t < 0.5)? (2 * t * t) : (1 - 0.5 * k * k);
 }
 
-static float cubic_ease_in(float t) {
+static inline float cubic_ease_in(float t) {
   return t * t * t;
 }
 
-static float cubic_ease_out(float t) {
+static inline float cubic_ease_out(float t) {
   float k = 1 - t;
   return 1 - k * k * k;
 }
 
-static float cubic_ease_in_out(float t) {
+static inline float cubic_ease_in_out(float t) {
   float k = -2 * t + 2;
   return (t < 0.5)? (4 * t * t * t) : (1 - 0.5 * k * k * k);
 }
 
-static float quart_ease_in(float t) {
+static inline float quart_ease_in(float t) {
   return t * t * t * t;
 }
 
-static float quart_ease_out(float t) {
+static inline float quart_ease_out(float t) {
   float k = 1 - t; 
   return 1 - k * k * k * k;
 }
 
-static float quart_ease_in_out(float t) {
+static inline float quart_ease_in_out(float t) {
   float k = -2 * t + 2;
   return (t < 0.5)? (8 * t * t * t * t) : (1 - 0.5 * k * k * k * k);
 }
 
-static float quint_ease_in(float t) {
+static inline float quint_ease_in(float t) {
   return t * t * t * t * t;
 }
 
-static float quint_ease_out(float t) {
+static inline float quint_ease_out(float t) {
   float k = 1 - t;
   return 1 - k * k * k * k * k;
 }
 
-static float quint_ease_in_out(float t) {
+static inline float quint_ease_in_out(float t) {
   float k = -2 * t + 2;
   return (t < 0.5)? (16 * t * t * t * t * t) : (1 - 0.5 * k * k * k * k * k);
 }
 
-static float expo_ease_in(float t) {
+static inline float expo_ease_in(float t) {
   return (t == 0)? 0 : powf(2, 10 * t - 10);
 }
 
-static float expo_ease_out(float t) {
+static inline float expo_ease_out(float t) {
   return (t == 1)? 1 : (1 - powf(2, -10 * t));
 }
 
-static float expo_ease_in_out(float t) {
+static inline float expo_ease_in_out(float t) {
   return (t == 0)? 0 : (t == 1)? 1 : t < 0.5? powf(2, 20 * t - 10) / 2 : (2 - powf(2, -20 * t + 10)) / 2;
 }
 
-static float circ_ease_in(float t) {
+static inline float circ_ease_in(float t) {
   return 1 - sqrt32(1 - (t * t));
 }
 
-static float circ_ease_out(float t) {
+static inline float circ_ease_out(float t) {
   return sqrt32(1 - (t - 1) * (t - 1));
 }
 
-static float circ_ease_in_out(float t) {
+static inline float circ_ease_in_out(float t) {
   float k = 2 * t;
   float l = -2 * t + 2;
   return (t < 0.5)? 0.5 * (1 - sqrt32(1 - k * k)) : 0.5 * (sqrt32(1 - l * l) + 1);
 }
 
-static float back_ease_in(float t) {
+static inline float back_ease_in(float t) {
   float c1 = 1.70158;
   float c3 = c1 + 1;
   return c3 * t * t * t - c1 * t * t;
 }
 
-static float back_ease_out(float t) {
+static inline float back_ease_out(float t) {
   float c1 = 1.70158;
   float c3 = c1 + 1;
   float k = t - 1;
   return 1 + c3 * k * k * k + c1 * k * k;
 }
 
-static float back_ease_in_out(float t) {
+static inline float back_ease_in_out(float t) {
   float c1 = 1.70158;
   float c2 = c1 * 1.525;
 
@@ -348,7 +351,7 @@ static float back_ease_in_out(float t) {
     0.5 * (pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2);
 }
 
-static float elastic_ease_in(float t) {
+static inline float elastic_ease_in(float t) {
   float c4 = (2 * PI) / 3;
   return (t == 0)?
     0 :
@@ -357,7 +360,7 @@ static float elastic_ease_in(float t) {
     -powf(2, 10 * t - 10) * sinf((t * 10 - 10.75) * c4);
 }
 
-static float elastic_ease_out(float t) {
+static inline float elastic_ease_out(float t) {
   float c4 = (2 * PI) / 3;
   return t == 0?
     0 :
@@ -366,7 +369,7 @@ static float elastic_ease_out(float t) {
     powf(2, -10 * t) * sinf((t * 10 - 0.75) * c4) + 1;
 }
 
-static float elastic_ease_inout(float t) {
+static inline float elastic_ease_inout(float t) {
   float c5 = (2 * PI) / 4.5;
   return t == 0?
     0 :
@@ -377,7 +380,7 @@ static float elastic_ease_inout(float t) {
     +0.5 * (powf(2, -20 * t + 10) * sinf((20 * t - 11.125) * c5)) + 1;
 }
 
-static float bounce_ease_out(float t) {
+static inline float bounce_ease_out(float t) {
   float n1 = 7.5625;
   float d1 = 2.75;
   if (t < 1 / d1) {
@@ -394,11 +397,11 @@ static float bounce_ease_out(float t) {
   }
 }
 
-static float bounce_ease_in(float t) {
+static inline float bounce_ease_in(float t) {
   return 1 - bounce_ease_out(t);
 }
 
-static float bounce_ease_in_out(float t) {
+static inline float bounce_ease_in_out(float t) {
   return t < 0.5?
     0.5 * (1 - bounce_ease_out(1 - 2 * t)) :
     0.5 * (1 + bounce_ease_out(2 * t - 1));
@@ -406,24 +409,24 @@ static float bounce_ease_in_out(float t) {
 
 // ---------- from array ---------- //
 
-static v2 v2_from_array(const float* a) { return V2(a[0], a[1]); }
-static v3 v3_from_array(const float* a) { return V3(a[0], a[1], a[2]); }
-static v4 v4_from_array(const float* a) { return V4(a[0], a[1], a[2], a[3]); }
+static inline v2 v2_from_array(const float* a) { return V2(a[0], a[1]); }
+static inline v3 v3_from_array(const float* a) { return V3(a[0], a[1], a[2]); }
+static inline v4 v4_from_array(const float* a) { return V4(a[0], a[1], a[2], a[3]); }
 
-static v2i v2i_from_array(const int* a) { return V2i(a[0], a[1]); }
-static v3i v3i_from_array(const int* a) { return V3i(a[0], a[1], a[2]); }
-static v4i v4i_from_array(const int* a) { return V4i(a[0], a[1], a[2], a[3]); }
+static inline v2i v2i_from_array(const int* a) { return V2i(a[0], a[1]); }
+static inline v3i v3i_from_array(const int* a) { return V3i(a[0], a[1], a[2]); }
+static inline v4i v4i_from_array(const int* a) { return V4i(a[0], a[1], a[2], a[3]); }
 
 // ---------- unpack color ------------ //
 
-static v3 v3_unpack_color(unsigned int color) {
+static inline v3 v3_unpack_color(unsigned int color) {
   return V3(
     ((color & 0x000000ff) >> 0)  / 256.0f,
     ((color & 0x0000ff00) >> 8)  / 256.0f,
     ((color & 0x00ff0000) >> 16) / 256.0f);
 }
 
-static v4 v4_unpack_color(unsigned int color) {
+static inline v4 v4_unpack_color(unsigned int color) {
   return V4(
     ((color & 0x000000ff) >> 0)  / 256.0f,
     ((color & 0x0000ff00) >> 8)  / 256.0f,
@@ -433,110 +436,110 @@ static v4 v4_unpack_color(unsigned int color) {
 
 // --------- negate ---------- //
 
-static v2 v2_neg(v2 u) { return V2(-u.x, -u.y); }
-static v3 v3_neg(v3 u) { return V3(-u.x, -u.y, -u.z); }
-static v4 v4_neg(v4 u) { return V4(-u.x, -u.y, -u.z, -u.w); }
+static inline v2 v2_neg(v2 u) { return V2(-u.x, -u.y); }
+static inline v3 v3_neg(v3 u) { return V3(-u.x, -u.y, -u.z); }
+static inline v4 v4_neg(v4 u) { return V4(-u.x, -u.y, -u.z, -u.w); }
 
-static v2i v2i_neg(v2i u) { return V2i(-u.x, -u.y); }
-static v3i v3i_neg(v3i u) { return V3i(-u.x, -u.y, -u.z); }
-static v4i v4i_neg(v4i u) { return V4i(-u.x, -u.y, -u.z, -u.w); }
+static inline v2i v2i_neg(v2i u) { return V2i(-u.x, -u.y); }
+static inline v3i v3i_neg(v3i u) { return V3i(-u.x, -u.y, -u.z); }
+static inline v4i v4i_neg(v4i u) { return V4i(-u.x, -u.y, -u.z, -u.w); }
 
 #ifdef __cplusplus
 
-static v2 operator-(v2 u) { return { -u.x, -u.y }; }
-static v3 operator-(v3 u) { return { -u.x, -u.y, -u.z }; }
-static v4 operator-(v4 u) { return { -u.x, -u.y, -u.z, -u.w }; }
+static inline v2 operator-(v2 u) { return { -u.x, -u.y }; }
+static inline v3 operator-(v3 u) { return { -u.x, -u.y, -u.z }; }
+static inline v4 operator-(v4 u) { return { -u.x, -u.y, -u.z, -u.w }; }
 
-static v2i operator-(v2i u) { return { -u.x, -u.y }; }
-static v3i operator-(v3i u) { return { -u.x, -u.y, -u.z }; }
-static v4i operator-(v4i u) { return { -u.x, -u.y, -u.z, -u.w }; }
+static inline v2i operator-(v2i u) { return { -u.x, -u.y }; }
+static inline v3i operator-(v3i u) { return { -u.x, -u.y, -u.z }; }
+static inline v4i operator-(v4i u) { return { -u.x, -u.y, -u.z, -u.w }; }
 
 #endif
 
 // ---------- addition ---------- //
 
-static v2 v2_add(v2 a, v2 b) { return V2(a.x + b.x, a.y + b.y); }
-static v3 v3_add(v3 a, v3 b) { return V3(a.x + b.x, a.y + b.y, a.z + b.z); }
-static v4 v4_add(v4 a, v4 b) { return V4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
+static inline v2 v2_add(v2 a, v2 b) { return V2(a.x + b.x, a.y + b.y); }
+static inline v3 v3_add(v3 a, v3 b) { return V3(a.x + b.x, a.y + b.y, a.z + b.z); }
+static inline v4 v4_add(v4 a, v4 b) { return V4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
 
-static v2i v2i_add(v2i a, v2i b) { return V2i(a.x + b.x, a.y + b.y); }
-static v3i v3i_add(v3i a, v3i b) { return V3i(a.x + b.x, a.y + b.y, a.z + b.z); }
-static v4i v4i_add(v4i a, v4i b) { return V4i(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
+static inline v2i v2i_add(v2i a, v2i b) { return V2i(a.x + b.x, a.y + b.y); }
+static inline v3i v3i_add(v3i a, v3i b) { return V3i(a.x + b.x, a.y + b.y, a.z + b.z); }
+static inline v4i v4i_add(v4i a, v4i b) { return V4i(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
 
 #ifdef __cplusplus
 
-static v2 operator+(v2 a, v2 b) { return { a.x + b.x, a.y + b.y }; }
-static v3 operator+(v3 a, v3 b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
-static v4 operator+(v4 a, v4 b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
+static inline v2 operator+(v2 a, v2 b) { return { a.x + b.x, a.y + b.y }; }
+static inline v3 operator+(v3 a, v3 b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
+static inline v4 operator+(v4 a, v4 b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
 
-static v2i operator+(v2i a, v2i b) { return { a.x + b.x, a.y + b.y }; }
-static v3i operator+(v3i a, v3i b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
-static v4i operator+(v4i a, v4i b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
+static inline v2i operator+(v2i a, v2i b) { return { a.x + b.x, a.y + b.y }; }
+static inline v3i operator+(v3i a, v3i b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
+static inline v4i operator+(v4i a, v4i b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
 
-static v2& operator+=(v2& a, v2 b) { a = a + b; return a; }
-static v3& operator+=(v3& a, v3 b) { a = a + b; return a; }
-static v4& operator+=(v4& a, v4 b) { a = a + b; return a; }
+static inline v2& operator+=(v2& a, v2 b) { a = a + b; return a; }
+static inline v3& operator+=(v3& a, v3 b) { a = a + b; return a; }
+static inline v4& operator+=(v4& a, v4 b) { a = a + b; return a; }
 
-static v2i& operator+=(v2i& a, v2i b) { a = a + b; return a; }
-static v3i& operator+=(v3i& a, v3i b) { a = a + b; return a; }
-static v4i& operator+=(v4i& a, v4i b) { a = a + b; return a; }
+static inline v2i& operator+=(v2i& a, v2i b) { a = a + b; return a; }
+static inline v3i& operator+=(v3i& a, v3i b) { a = a + b; return a; }
+static inline v4i& operator+=(v4i& a, v4i b) { a = a + b; return a; }
 
 #endif
 
 // -------- subtraction ------- //
 
-static v2 v2_sub(v2 a, v2 b) { return V2(a.x - b.x, a.y - b.y); }
-static v3 v3_sub(v3 a, v3 b) { return V3(a.x - b.x, a.y - b.y, a.z - b.z); }
-static v4 v4_sub(v4 a, v4 b) { return V4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
+static inline v2 v2_sub(v2 a, v2 b) { return V2(a.x - b.x, a.y - b.y); }
+static inline v3 v3_sub(v3 a, v3 b) { return V3(a.x - b.x, a.y - b.y, a.z - b.z); }
+static inline v4 v4_sub(v4 a, v4 b) { return V4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
 
-static v2i v2i_sub(v2i a, v2i b) { return V2i(a.x - b.x, a.y - b.y); }
-static v3i v3i_sub(v3i a, v3i b) { return V3i(a.x - b.x, a.y - b.y, a.z - b.z); }
-static v4i v4i_sub(v4i a, v4i b) { return V4i(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
+static inline v2i v2i_sub(v2i a, v2i b) { return V2i(a.x - b.x, a.y - b.y); }
+static inline v3i v3i_sub(v3i a, v3i b) { return V3i(a.x - b.x, a.y - b.y, a.z - b.z); }
+static inline v4i v4i_sub(v4i a, v4i b) { return V4i(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
 
 #ifdef __cplusplus
 
-static v2 operator-(v2 a, v2 b) { return { a.x - b.x, a.y - b.y }; }
-static v3 operator-(v3 a, v3 b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
-static v4 operator-(v4 a, v4 b) { return { a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w }; }
+static inline v2 operator-(v2 a, v2 b) { return { a.x - b.x, a.y - b.y }; }
+static inline v3 operator-(v3 a, v3 b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
+static inline v4 operator-(v4 a, v4 b) { return { a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w }; }
 
-static v2i operator-(v2i a, v2i b) { return { a.x - b.x, a.y - b.y }; }
-static v3i operator-(v3i a, v3i b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
-static v4i operator-(v4i a, v4i b) { return { a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w }; }
+static inline v2i operator-(v2i a, v2i b) { return { a.x - b.x, a.y - b.y }; }
+static inline v3i operator-(v3i a, v3i b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
+static inline v4i operator-(v4i a, v4i b) { return { a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w }; }
 
-static v2& operator-=(v2& a, v2 b) { a = a - b; return a; }
-static v3& operator-=(v3& a, v3 b) { a = a - b; return a; }
-static v4& operator-=(v4& a, v4 b) { a = a - b; return a; }
+static inline v2& operator-=(v2& a, v2 b) { a = a - b; return a; }
+static inline v3& operator-=(v3& a, v3 b) { a = a - b; return a; }
+static inline v4& operator-=(v4& a, v4 b) { a = a - b; return a; }
 
-static v2i& operator-=(v2i& a, v2i b) { a = a - b; return a; }
-static v3i& operator-=(v3i& a, v3i b) { a = a - b; return a; }
-static v4i& operator-=(v4i& a, v4i b) { a = a - b; return a; }
+static inline v2i& operator-=(v2i& a, v2i b) { a = a - b; return a; }
+static inline v3i& operator-=(v3i& a, v3i b) { a = a - b; return a; }
+static inline v4i& operator-=(v4i& a, v4i b) { a = a - b; return a; }
 
 #endif
 
 // -------- multiplication ------- //
 
-static v2 v2_mul(v2 a, v2 b) { return V2(a.x * b.x, a.y * b.y); }
-static v3 v3_mul(v3 a, v3 b) { return V3(a.x * b.x, a.y * b.y, a.z * b.z); }
-static v4 v4_mul(v4 a, v4 b) { return V4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * a.w); }
+static inline v2 v2_mul(v2 a, v2 b) { return V2(a.x * b.x, a.y * b.y); }
+static inline v3 v3_mul(v3 a, v3 b) { return V3(a.x * b.x, a.y * b.y, a.z * b.z); }
+static inline v4 v4_mul(v4 a, v4 b) { return V4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * a.w); }
 
-static v2i v2i_mul(v2i a, v2i b) { return V2i(a.x * b.x, a.y * b.y); }
-static v3i v3i_mul(v3i a, v3i b) { return V3i(a.x * b.x, a.y * b.y, a.z * a.z); }
-static v4i v4i_mul(v4i a, v4i b) { return V4i(a.x * b.x, a.y * b.y, a.z * a.z, a.w * a.w); }
+static inline v2i v2i_mul(v2i a, v2i b) { return V2i(a.x * b.x, a.y * b.y); }
+static inline v3i v3i_mul(v3i a, v3i b) { return V3i(a.x * b.x, a.y * b.y, a.z * a.z); }
+static inline v4i v4i_mul(v4i a, v4i b) { return V4i(a.x * b.x, a.y * b.y, a.z * a.z, a.w * a.w); }
 
-static v2 m2_mulv(m2 m, v2 u) {
+static inline v2 m2_mulv(m2 m, v2 u) {
   return V2(
     m.e[0] * u.x + m.e[2] * u.y,
     m.e[1] * u.x + m.e[3] * u.y);
 }
 
-static v3 m3_mulv(m3 m, v3 u) {
+static inline v3 m3_mulv(m3 m, v3 u) {
   return V3(
     m.e[0] * u.x + m.e[3] * u.y + m.e[6] * u.z,
     m.e[1] * u.x + m.e[4] * u.y + m.e[7] * u.z,
     m.e[2] * u.x + m.e[5] * u.y + m.e[8] * u.z);
 }
 
-static v4 m4_mulv(m4 m, v4 u) {
+static inline v4 m4_mulv(m4 m, v4 u) {
   return V4(
     m.e[0] * u.x + m.e[4] * u.y + m.e[8]  * u.z + m.e[12] * u.w,
     m.e[1] * u.x + m.e[5] * u.y + m.e[9]  * u.z + m.e[13] * u.w,
@@ -544,7 +547,7 @@ static v4 m4_mulv(m4 m, v4 u) {
     m.e[3] * u.x + m.e[7] * u.y + m.e[11] * u.z + m.e[15] * u.w);
 }
 
-static m2 m2_mul(m2 a, m2 b) {
+static inline m2 m2_mul(m2 a, m2 b) {
   return M2(
     a.e[0] * b.e[0] + a.e[2] * b.e[1],
     a.e[1] * b.e[0] + a.e[3] * b.e[1],
@@ -552,7 +555,7 @@ static m2 m2_mul(m2 a, m2 b) {
     a.e[1] * b.e[2] + a.e[3] * b.e[3]);
 }
 
-static m3 m3_mul(m3 a, m3 b) {
+static inline m3 m3_mul(m3 a, m3 b) {
   return M3(
     a.e[0] * b.e[0] + a.e[3] * b.e[1]  + a.e[6] * b.e[2],
     a.e[1] * b.e[0] + a.e[4] * b.e[1]  + a.e[7] * b.e[2],
@@ -567,7 +570,7 @@ static m3 m3_mul(m3 a, m3 b) {
     a.e[2] * b.e[6] + a.e[5] * b.e[7]  + a.e[8] * b.e[8]);
 }
 
-static m4 m4_mul(m4 a, m4 b) {
+static inline m4 m4_mul(m4 a, m4 b) {
   return M4(
     a.e[0] * b.e[0]  + a.e[4] * b.e[1]  + a.e[8]  * b.e[2]  + a.e[12] * b.e[3],
     a.e[1] * b.e[0]  + a.e[5] * b.e[1]  + a.e[9]  * b.e[2]  + a.e[13] * b.e[3],
@@ -590,7 +593,7 @@ static m4 m4_mul(m4 a, m4 b) {
     a.e[3] * b.e[12] + a.e[7] * b.e[13] + a.e[11] * b.e[14] + a.e[15] * b.e[15]);
 }
 
-static quat_t quat_mul(quat_t a, quat_t b) {
+static inline quat_t quat_mul(quat_t a, quat_t b) {
   return Quat(
     a.y * b.z - a.z * b.y + a.w * b.x + b.w * a.x,
     a.z * b.x - a.x * b.z + a.w * b.y + b.w * a.y,
@@ -600,29 +603,29 @@ static quat_t quat_mul(quat_t a, quat_t b) {
 
 #ifdef __cplusplus
 
-static v2 operator*(v2 a, v2 b) { return { a.x * b.x, a.y * b.y }; }
-static v3 operator*(v3 a, v3 b) { return { a.x * b.x, a.y * b.y, a.z * b.z }; }
-static v4 operator*(v4 a, v4 b) { return { a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w }; }
+static inline v2 operator*(v2 a, v2 b) { return { a.x * b.x, a.y * b.y }; }
+static inline v3 operator*(v3 a, v3 b) { return { a.x * b.x, a.y * b.y, a.z * b.z }; }
+static inline v4 operator*(v4 a, v4 b) { return { a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w }; }
 
-static v2i operator*(v2i a, v2i b) { return { a.x * b.x, a.y * b.y }; }
-static v3i operator*(v3i a, v3i b) { return { a.x * b.x, a.y * b.y, a.z * b.z }; }
-static v4i operator*(v4i a, v4i b) { return { a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w }; }
+static inline v2i operator*(v2i a, v2i b) { return { a.x * b.x, a.y * b.y }; }
+static inline v3i operator*(v3i a, v3i b) { return { a.x * b.x, a.y * b.y, a.z * b.z }; }
+static inline v4i operator*(v4i a, v4i b) { return { a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w }; }
 
-static v2& operator*=(v2& a, v2 b) { a = a * b; return a; }
-static v3& operator*=(v3& a, v3 b) { a = a * b; return a; }
-static v4& operator*=(v4& a, v4 b) { a = a * b; return a; }
+static inline v2& operator*=(v2& a, v2 b) { a = a * b; return a; }
+static inline v3& operator*=(v3& a, v3 b) { a = a * b; return a; }
+static inline v4& operator*=(v4& a, v4 b) { a = a * b; return a; }
 
-static v2i& operator*=(v2i& a, v2i b) { a = a * b; return a; }
-static v3i& operator*=(v3i& a, v3i b) { a = a * b; return a; }
-static v4i& operator*=(v4i& a, v4i b) { a = a * b; return a; }
+static inline v2i& operator*=(v2i& a, v2i b) { a = a * b; return a; }
+static inline v3i& operator*=(v3i& a, v3i b) { a = a * b; return a; }
+static inline v4i& operator*=(v4i& a, v4i b) { a = a * b; return a; }
 
-static v2 operator*(m2 m, v2 u) { return m2_mulv(m, u); }
-static v3 operator*(m3 m, v3 u) { return m3_mulv(m, u); }
-static v4 operator*(m4 m, v4 u) { return m4_mulv(m, u); }
+static inline v2 operator*(m2 m, v2 u) { return m2_mulv(m, u); }
+static inline v3 operator*(m3 m, v3 u) { return m3_mulv(m, u); }
+static inline v4 operator*(m4 m, v4 u) { return m4_mulv(m, u); }
 
-static m2 operator*(m2 a, m2 b) { return m2_mul(a, b); }
-static m3 operator*(m3 a, m3 b) { return m3_mul(a, b); }
-static m4 operator*(m4 a, m4 b) { return m4_mul(a, b); }
+static inline m2 operator*(m2 a, m2 b) { return m2_mul(a, b); }
+static inline m3 operator*(m3 a, m3 b) { return m3_mul(a, b); }
+static inline m4 operator*(m4 a, m4 b) { return m4_mul(a, b); }
 
 static quat_t operator*(quat_t a, quat_t b) { return quat_mul(a, b); }
 
@@ -630,113 +633,113 @@ static quat_t operator*(quat_t a, quat_t b) { return quat_mul(a, b); }
 
 // ------------ divition ------------ //
 
-static v2 v2_div(v2 a, v2 b) { return V2(a.x / b.x, a.y / b.y); }
-static v3 v3_div(v3 a, v3 b) { return V3(a.x / b.x, a.y / b.y, a.z / b.z); }
-static v4 v4_div(v4 a, v4 b) { return V4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
+static inline v2 v2_div(v2 a, v2 b) { return V2(a.x / b.x, a.y / b.y); }
+static inline v3 v3_div(v3 a, v3 b) { return V3(a.x / b.x, a.y / b.y, a.z / b.z); }
+static inline v4 v4_div(v4 a, v4 b) { return V4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
 
-static v2i v2i_div(v2i a, v2i b) { return V2i(a.x / b.x, a.y / b.y); }
-static v3i v3i_div(v3i a, v3i b) { return V3i(a.x / b.x, a.y / b.y, a.z / b.z); }
-static v4i v4i_div(v4i a, v4i b) { return V4i(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
+static inline v2i v2i_div(v2i a, v2i b) { return V2i(a.x / b.x, a.y / b.y); }
+static inline v3i v3i_div(v3i a, v3i b) { return V3i(a.x / b.x, a.y / b.y, a.z / b.z); }
+static inline v4i v4i_div(v4i a, v4i b) { return V4i(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
 
 #ifdef __cplusplus
 
-static v2 operator/(v2 a, v2 b) { return { a.x / b.x, a.y / b.y }; }
-static v3 operator/(v3 a, v3 b) { return { a.x / b.x, a.y / b.y, a.z / b.z }; }
-static v4 operator/(v4 a, v4 b) { return { a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w }; }
+static inline v2 operator/(v2 a, v2 b) { return { a.x / b.x, a.y / b.y }; }
+static inline v3 operator/(v3 a, v3 b) { return { a.x / b.x, a.y / b.y, a.z / b.z }; }
+static inline v4 operator/(v4 a, v4 b) { return { a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w }; }
 
-static v2i operator/(v2i a, v2i b) { return { a.x / b.x, a.y / b.y }; }
-static v3i operator/(v3i a, v3i b) { return { a.x / b.x, a.y / b.y, a.z / b.z }; }
-static v4i operator/(v4i a, v4i b) { return { a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w }; }
+static inline v2i operator/(v2i a, v2i b) { return { a.x / b.x, a.y / b.y }; }
+static inline v3i operator/(v3i a, v3i b) { return { a.x / b.x, a.y / b.y, a.z / b.z }; }
+static inline v4i operator/(v4i a, v4i b) { return { a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w }; }
 
-static v2& operator/=(v2& a, v2 b) { a = a / b; return a; }
-static v3& operator/=(v3& a, v3 b) { a = a / b; return a; }
-static v4& operator/=(v4& a, v4 b) { a = a / b; return a; }
+static inline v2& operator/=(v2& a, v2 b) { a = a / b; return a; }
+static inline v3& operator/=(v3& a, v3 b) { a = a / b; return a; }
+static inline v4& operator/=(v4& a, v4 b) { a = a / b; return a; }
 
-static v2i& operator/=(v2i& a, v2i b) { a = a / b; return a; }
-static v3i& operator/=(v3i& a, v3i b) { a = a / b; return a; }
-static v4i& operator/=(v4i& a, v4i b) { a = a / b; return a; }
+static inline v2i& operator/=(v2i& a, v2i b) { a = a / b; return a; }
+static inline v3i& operator/=(v3i& a, v3i b) { a = a / b; return a; }
+static inline v4i& operator/=(v4i& a, v4i b) { a = a / b; return a; }
 
 #endif
 
 // ------------- scaling ------------- //
 
-static v2 v2_scale(v2 a, float s) { return V2(a.x * s, a.y * s); }
-static v3 v3_scale(v3 a, float s) { return V3(a.x * s, a.y * s, a.z * s); }
-static v4 v4_scale(v4 a, float s) { return V4(a.x * s, a.y * s, a.z * s, a.w * s); }
+static inline v2 v2_scale(v2 a, float s) { return V2(a.x * s, a.y * s); }
+static inline v3 v3_scale(v3 a, float s) { return V3(a.x * s, a.y * s, a.z * s); }
+static inline v4 v4_scale(v4 a, float s) { return V4(a.x * s, a.y * s, a.z * s, a.w * s); }
 
-static v2i v2i_scale(v2i a, int s) { return V2i(a.x * s, a.y * s); }
-static v3i v3i_scale(v3i a, int s) { return V3i(a.x * s, a.y * s, a.z * s); }
-static v4i v4i_scale(v4i a, int s) { return V4i(a.x * s, a.y * s, a.z * s, a.w * s); }
+static inline v2i v2i_scale(v2i a, int s) { return V2i(a.x * s, a.y * s); }
+static inline v3i v3i_scale(v3i a, int s) { return V3i(a.x * s, a.y * s, a.z * s); }
+static inline v4i v4i_scale(v4i a, int s) { return V4i(a.x * s, a.y * s, a.z * s, a.w * s); }
 
 #ifdef __cplusplus
 
-static v2 operator*(v2 a, float s) { return { a.x * s, a.y * s }; }
-static v3 operator*(v3 a, float s) { return { a.x * s, a.y * s, a.z * s }; }
-static v4 operator*(v4 a, float s) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
+static inline v2 operator*(v2 a, float s) { return { a.x * s, a.y * s }; }
+static inline v3 operator*(v3 a, float s) { return { a.x * s, a.y * s, a.z * s }; }
+static inline v4 operator*(v4 a, float s) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
 
-static v2 operator*(float s, v2 a) { return { a.x * s, a.y * s }; }
-static v3 operator*(float s, v3 a) { return { a.x * s, a.y * s, a.z * s }; }
-static v4 operator*(float s, v4 a) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
+static inline v2 operator*(float s, v2 a) { return { a.x * s, a.y * s }; }
+static inline v3 operator*(float s, v3 a) { return { a.x * s, a.y * s, a.z * s }; }
+static inline v4 operator*(float s, v4 a) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
 
-static v2i operator*(v2i a, int s) { return { a.x * s, a.y * s }; }
-static v3i operator*(v3i a, int s) { return { a.x * s, a.y * s, a.z * s }; }
-static v4i operator*(v4i a, int s) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
+static inline v2i operator*(v2i a, int s) { return { a.x * s, a.y * s }; }
+static inline v3i operator*(v3i a, int s) { return { a.x * s, a.y * s, a.z * s }; }
+static inline v4i operator*(v4i a, int s) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
 
-static v2i operator*(int s, v2i a) { return { a.x * s, a.y * s }; }
-static v3i operator*(int s, v3i a) { return { a.x * s, a.y * s, a.z * s }; }
-static v4i operator*(int s, v4i a) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
+static inline v2i operator*(int s, v2i a) { return { a.x * s, a.y * s }; }
+static inline v3i operator*(int s, v3i a) { return { a.x * s, a.y * s, a.z * s }; }
+static inline v4i operator*(int s, v4i a) { return { a.x * s, a.y * s, a.z * s, a.w * s }; }
 
-static v2& operator*=(v2& a, float s) { a = a * s; return a; }
-static v3& operator*=(v3& a, float s) { a = a * s; return a; }
-static v4& operator*=(v4& a, float s) { a = a * s; return a; }
+static inline v2& operator*=(v2& a, float s) { a = a * s; return a; }
+static inline v3& operator*=(v3& a, float s) { a = a * s; return a; }
+static inline v4& operator*=(v4& a, float s) { a = a * s; return a; }
 
-static v2i& operator*=(v2i& a, float s) { a = a * s; return a; }
-static v3i& operator*=(v3i& a, float s) { a = a * s; return a; }
-static v4i& operator*=(v4i& a, float s) { a = a * s; return a; }
+static inline v2i& operator*=(v2i& a, float s) { a = a * s; return a; }
+static inline v3i& operator*=(v3i& a, float s) { a = a * s; return a; }
+static inline v4i& operator*=(v4i& a, float s) { a = a * s; return a; }
 
 #endif
 
 // ----------- eq ------------ //
 
-static bool v2i_eq(v2i a, v2i b) { return a.x == b.x && a.y == b.y; }
-static bool v3i_eq(v3i a, v3i b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
-static bool v4i_eq(v4i a, v4i b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
+static inline bool v2i_eq(v2i a, v2i b) { return a.x == b.x && a.y == b.y; }
+static inline bool v3i_eq(v3i a, v3i b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
+static inline bool v4i_eq(v4i a, v4i b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
 
-static bool v2i_neq(v2i a, v2i b) { return a.x != b.x || a.y != b.y; }
-static bool v3i_neq(v3i a, v3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
-static bool v4i_neq(v4i a, v4i b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
+static inline bool v2i_neq(v2i a, v2i b) { return a.x != b.x || a.y != b.y; }
+static inline bool v3i_neq(v3i a, v3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
+static inline bool v4i_neq(v4i a, v4i b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
 
 #ifdef __cplusplus
 
-static bool operator==(v2i a, v2i b) { return a.x == b.x && a.y == b.y; }
-static bool operator==(v3i a, v3i b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
-static bool operator==(v4i a, v4i b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
+static inline bool operator==(v2i a, v2i b) { return a.x == b.x && a.y == b.y; }
+static inline bool operator==(v3i a, v3i b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
+static inline bool operator==(v4i a, v4i b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
 
-static bool operator!=(v2i a, v2i b) { return a.x != b.x || a.y != b.y; }
-static bool operator!=(v3i a, v3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
-static bool operator!=(v4i a, v4i b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
+static inline bool operator!=(v2i a, v2i b) { return a.x != b.x || a.y != b.y; }
+static inline bool operator!=(v3i a, v3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
+static inline bool operator!=(v4i a, v4i b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
 
 #endif
 
 // ----------- dot product ----------- //
 
-static float v2_dot(v2 a, v2 b) { return a.x * b.x + a.y * b.y; }
-static float v3_dot(v3 a, v3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-static float v4_dot(v4 a, v4 b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
+static inline float v2_dot(v2 a, v2 b) { return a.x * b.x + a.y * b.y; }
+static inline float v3_dot(v3 a, v3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+static inline float v4_dot(v4 a, v4 b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
 
-static int v2i_dot(v2i a, v2i b) { return a.x * b.x + a.y * b.y; }
-static int v3i_dot(v3i a, v3i b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-static int v4i_dot(v4i a, v4i b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
+static inline int v2i_dot(v2i a, v2i b) { return a.x * b.x + a.y * b.y; }
+static inline int v3i_dot(v3i a, v3i b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+static inline int v4i_dot(v4i a, v4i b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
 
 #ifdef __cplusplus
 
-static float dot(v2 a, v2 b) { return a.x * b.x + a.y * b.y; }
-static float dot(v3 a, v3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-static float dot(v4 a, v4 b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
+static inline float dot(v2 a, v2 b) { return a.x * b.x + a.y * b.y; }
+static inline float dot(v3 a, v3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+static inline float dot(v4 a, v4 b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
 
-static int dot(v2i a, v2i b) { return a.x * b.x + a.y * b.y; }
-static int dot(v3i a, v3i b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-static int dot(v4i a, v4i b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
+static inline int dot(v2i a, v2i b) { return a.x * b.x + a.y * b.y; }
+static inline int dot(v3i a, v3i b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+static inline int dot(v4i a, v4i b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
 
 #endif
 
