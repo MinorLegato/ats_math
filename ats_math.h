@@ -857,20 +857,20 @@ static v4 norm(v4 u) { return v4_scale(u, rsqrt32(v4_dot(u, u))); }
 
 static v2 v2_project(v2 a, v2 b) {
   float d = v2_dot(b, b);
-  if (d == 0) return V2(0);
+  if (d == 0) return V2(0, 0);
   return v2_scale(b, v2_dot(a, b) / d);
 }
 
 static v3 v3_project(v3 a, v3 b) {
   float d = v3_dot(b, b);
-  if (d == 0) return V3(0);
+  if (d == 0) return V3(0, 0, 0);
   return v3_scale(b, v3_dot(a, b) / d);
 }
 
 #ifdef __cplusplus
 
-struct v2 project(v2 a, v2 b) { return v2_project(a, b); }
-struct v3 project(v3 a, v3 b) { return v3_project(a, b); }
+static v2 project(v2 a, v2 b) { return v2_project(a, b); }
+static v3 project(v3 a, v3 b) { return v3_project(a, b); }
 
 #endif
 
