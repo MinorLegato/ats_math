@@ -745,23 +745,23 @@ static inline int dot(v4i a, v4i b) { return a.x * b.x + a.y * b.y + a.z * b.z +
 
 // ----------- length squared ----------- //
 
-static float v2_len_sq(v2 u) { return v2_dot(u, u); }
-static float v3_len_sq(v3 u) { return v3_dot(u, u); }
-static float v4_len_sq(v4 u) { return v4_dot(u, u); }
+static inline float v2_len_sq(v2 u) { return v2_dot(u, u); }
+static inline float v3_len_sq(v3 u) { return v3_dot(u, u); }
+static inline float v4_len_sq(v4 u) { return v4_dot(u, u); }
 
-static int v2i_len_sq(v2i u) { return v2i_dot(u, u); }
-static int v3i_len_sq(v3i u) { return v3i_dot(u, u); }
-static int v4i_len_sq(v4i u) { return v4i_dot(u, u); }
+static inline int v2i_len_sq(v2i u) { return v2i_dot(u, u); }
+static inline int v3i_len_sq(v3i u) { return v3i_dot(u, u); }
+static inline int v4i_len_sq(v4i u) { return v4i_dot(u, u); }
 
 #ifdef __cplusplus
 
-static float len_sq(v2 u) { return v2_dot(u, u); }
-static float len_sq(v3 u) { return v3_dot(u, u); }
-static float len_sq(v4 u) { return v4_dot(u, u); }
+static inline float len_sq(v2 u) { return v2_dot(u, u); }
+static inline float len_sq(v3 u) { return v3_dot(u, u); }
+static inline float len_sq(v4 u) { return v4_dot(u, u); }
 
-static int len_sq(v2i u) { return v2i_dot(u, u); }
-static int len_sq(v3i u) { return v3i_dot(u, u); }
-static int len_sq(v4i u) { return v4i_dot(u, u); }
+static inline int len_sq(v2i u) { return v2i_dot(u, u); }
+static inline int len_sq(v3i u) { return v3i_dot(u, u); }
+static inline int len_sq(v4i u) { return v4i_dot(u, u); }
 
 #endif
 
